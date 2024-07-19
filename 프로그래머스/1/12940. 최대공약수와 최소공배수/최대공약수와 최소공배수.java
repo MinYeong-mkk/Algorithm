@@ -4,8 +4,8 @@ import java.io.*;
 class Solution {
     public ArrayList solution(int n, int m) {
         ArrayList<Integer> al = new ArrayList<>();
-        al.add(gcd(n,m));
-        al.add(lcm(n,m));
+        al.add(gcd(m,n));
+        al.add(lcm(m,n));
         return al;
     }
     public static int gcd(int n, int m){
