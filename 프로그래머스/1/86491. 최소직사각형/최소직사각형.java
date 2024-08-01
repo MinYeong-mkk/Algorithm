@@ -7,14 +7,8 @@ class Solution {
         ArrayList<Integer> max = new ArrayList<>();
         
         for(int i=0;i<sizes.length;i++){
-            if(sizes[i][0]>sizes[i][1]){
-                min.add(sizes[i][1]);
-                max.add(sizes[i][0]);
-            }
-            else{
-                min.add(sizes[i][0]);
-                max.add(sizes[i][1]);
-            }
+            min.add(Math.min(sizes[i][0], sizes[i][1]));
+            max.add(Math.max(sizes[i][0], sizes[i][1]));
         }
         answer =Collections.max(min)*Collections.max(max);
         return answer;
