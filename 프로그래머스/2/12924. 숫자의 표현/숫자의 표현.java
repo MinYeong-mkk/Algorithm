@@ -1,17 +1,18 @@
 class Solution {
     public int solution(int n) {
         int sum = 0;
+        int i=0;
         int cnt=0;
-        for(int i=1;i<n;i++){
-            for(int j=i;j<n;j++){
-                sum+=j;
-                if(sum==n) cnt++;
-                if(sum>=n) {
-                    sum=0;
-                    break;
-                }
-            }
+        
+        while(sum+i<n){
+            i++;
+            sum+=i;
         }
-        return cnt+1;
+        while(i!=0){
+            if((n-sum)%i==0) cnt+=1;
+            sum-=i;
+            i-=1;
+        }
+        return cnt;
     }
 }
