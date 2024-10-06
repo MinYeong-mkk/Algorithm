@@ -3,13 +3,14 @@ class Solution {
         return fibo(n);
     }
     public static int fibo(int n){
+        int f=1;
         int pref=0;
         int temp=0;
-        int f=1;
-        for(int i=1;i<=n;i++){
+        
+        for(int i=0;i<n;i++){
             temp = f;
             f = (f+pref)%1234567;
-            pref=temp;
+            pref = temp;
         }
         return f;
     }
