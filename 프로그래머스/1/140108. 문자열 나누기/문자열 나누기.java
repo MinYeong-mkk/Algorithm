@@ -1,30 +1,21 @@
 import java.util.*;
 
 class Solution {
+    static int answer, cnt;
+    static char key = '0';
     public int solution(String s) {
-        char key = s.charAt(0);
-        int keycnt = 1;
-        int notkeycnt = 0;
-        int cnt = 0;
-        for(int i=1;i<s.length();i++){
-            if(key==s.charAt(i)) keycnt++;
-            else notkeycnt++;
-            if(keycnt==notkeycnt) {
-                if(i==s.length()-1) {
-                    cnt++;
-                    break;
-                }else{
-                    cnt++;
-                    key = s.charAt(++i);
-                    keycnt = 1;
-                    notkeycnt = 0;
-                }     
-            }
-            if(i==s.length()-1) {
-                cnt++;
-                break;
+        for(int i=0; i<s.length(); i++){
+            if(cnt == 0) keyChange(s, i);
+            else{
+                if(s.charAt(i) == key) cnt++;
+                else cnt--;
             }
         }
-        return s.length()==1 ? 1 : cnt;
+        return answer;
+    }
+    public static void keyChange(String s, int i){
+        key = s.charAt(i);
+        answer++;
+        cnt++;
     }
 }
