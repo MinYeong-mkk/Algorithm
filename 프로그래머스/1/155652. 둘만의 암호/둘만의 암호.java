@@ -10,12 +10,8 @@ class Solution {
         for(int i=0;i<s.length();i++){
             int origin_idx = s.charAt(i) - 'a';
             for(int j=0; j<index; j++){
-                origin_idx++;
-                origin_idx%=26;
-                while(set.contains(origin_idx)){
-                    origin_idx++;
-                    origin_idx%=26;
-                }
+                origin_idx = (origin_idx+1)%26;
+                while(set.contains(origin_idx)) origin_idx = (origin_idx+1)%26;
             }
             sb.append((char)(origin_idx+'a'));
         }
