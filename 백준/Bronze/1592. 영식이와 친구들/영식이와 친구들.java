@@ -15,24 +15,16 @@ public class Main {
 		int cnt = 0;
 		int[] round = new int[N];
 		int i = 0;
-		while(M!=Max(round)) {
+		while(true) {
 			round[i]++;
+			if(round[i] == M) break;
 			if(round[i]%2==0) i-=L;
 			else i += L;
 			
-			if(i>=N) i-=N;
+			if(i>=N) i%=N;
 			else if(i<0) i+=N;
 			cnt++;
 		}
-		System.out.println(cnt-1);
+		System.out.println(cnt);
 	}
-	
-	public static int Max(int[] arr) {
-		int max = Integer.MIN_VALUE;
-		for (int i = 0; i < arr.length; i++) {
-			if(arr[i]>max) max = arr[i];
-		}
-		return max;
-	}
-
 }
