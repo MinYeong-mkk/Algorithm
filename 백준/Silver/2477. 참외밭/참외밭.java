@@ -1,47 +1,35 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-	static int N;
-	public static void main(String[] args) throws Exception{
-
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int max_col = 0;
-		int max_vol= 0;
-		int min_col= 501;
-		int min_vol= 501;
-		N = Integer.parseInt(br.readLine());
-		int[] array = new int[6];
-		for (int i = 0; i < 6; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			int n = Integer.parseInt(st.nextToken());
-			array[i] = Integer.parseInt(st.nextToken());
-		}
-		
-		for (int j = 0; j < 6; j++) {
-			if(j%2 == 0) {
-				if(max_col<array[j]) {
-					max_col = array[j];
-				}
-			}else {
-				if(max_vol<array[j]) {
-					max_vol = array[j];
-				}
-			}
-		}
-		for (int j = 0; j < 6; j++) {
-			if(j%2 == 0) {
-				if(max_vol == array[(j+5)%6]+array[(j+1)%6]) {
-					min_col = array[j];
-				}
-			}else {
-				if(max_col == array[(j+5)%6]+array[(j+1)%6]) {
-					min_vol = array[j];
-				}
-			}
-		}
-		System.out.println((max_vol*max_col-min_vol*min_col)*N);
+	    StringTokenizer st;
+	    
+	    int N = Integer.parseInt(br.readLine());//참외 개수
+	    int[]arr = new int[6];
+	    int MWI=0,MW=0,MH=0,MHI=0,d;
+	    int SW = 0, SH = 0;
+	    for(int i=0; i<6; i++) {
+	    	st = new StringTokenizer(br.readLine());
+	    	d = Integer.parseInt(st.nextToken());// 각 방향
+	    	arr[i]=Integer.parseInt(st.nextToken());
+			//가장 긴 가로의 길이와 위치 찾기
+	    	if(d<=2 && MW<arr[i]) {
+	    		MW=arr[i];
+	    		MWI=i;
+	    	}
+			//가장 긴 세로의 길이와 위치 찾기
+	    	else if(d>=3 && MH<arr[i]){
+	    		MH=arr[i];
+	    		MHI=i;
+	    	}
+	    }
+	    SW = arr[(MWI + 1) % 6]>arr[(MWI + 5) % 6]? arr[(MWI + 1) % 6]-arr[(MWI + 5) % 6]:arr[(MWI + 5) % 6]-arr[(MWI + 1) % 6];	    
+	    SH = arr[(MHI + 1) % 6]>arr[(MHI + 5) % 6]? arr[(MHI + 1) % 6]-arr[(MHI + 5) % 6]:arr[(MHI + 5) % 6]-arr[(MHI + 1) % 6];
+	    
+	    System.out.println((MW*MH-SW*SH)*N);
 	}
 }
