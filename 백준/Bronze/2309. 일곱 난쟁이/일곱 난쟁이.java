@@ -1,46 +1,36 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
 
 public class Main {
-	
-	static int[] dwarf = new int[9];
-	static int[] real = new int[7];
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static int[] selected, dwarf;
 	static int sum;
-	static boolean flag;
-	
-	public static void main(String[] args) throws Exception{
-		// TODO Auto-generated method stub
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		for (int i = 0; i < 9; i++) {
-			dwarf[i] = Integer.parseInt(br.readLine());
-		}
-		comb(0, 0);
+	static boolean flag = false;
+	public static void main(String[] args) throws IOException{
+		selected = new int[7];
+		dwarf = new int[9];
+
+		for (int i = 0; i < 9; i++) dwarf[i] = Integer.parseInt(br.readLine());
+		조합(0,0);
 		
 	}
-	static void comb(int dwarfIdx, int realIdx) {
-		if(realIdx == 7) {
-			sum=0;
-			for (int i = 0; i < real.length; i++) {
-				sum += real[i];
-			}
-			if(sum==100) {
-				flag = true;
-				Arrays.sort(real);
-				for (int j = 0; j < real.length; j++) {
-					System.out.println(real[j]);
-					
+
+	private static void 조합(int start, int cnt) {
+		if(7==cnt) {
+			sum = 0;
+			for (int i = 0; i < 7; i++) sum+=selected[i];
+			if(sum==100 && !flag) {
+				Arrays.sort(selected);
+				for (int i = 0; i < 7; i++) {
+					System.out.println(selected[i]);
 				}
+				flag=true;
 			}
 			return;
 		}
-		for (int i = dwarfIdx; i < dwarf.length; i++) {
-			real[realIdx] = dwarf[i];
-			comb(i+1,realIdx+1);
-			if(flag) {
-				return;
-			}
+		for (int i = start; i < 9; i++) {
+			selected[cnt] = dwarf[i];
+			조합(i+1, cnt+1);
 		}
 	}
 }
