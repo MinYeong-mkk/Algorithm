@@ -9,5 +9,5 @@ bool solution(string s)
         if(s[i] == 'p' || s[i] == 'P') n++;
         else if(s[i] == 'y' || s[i] == 'Y') n--;
     }
-    return n==0;
+    return !n;
 }
